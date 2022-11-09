@@ -15,9 +15,9 @@ public class Main : MonoBehaviour
      */
     public string turn;//누구턴인지 판별변수 W는흰팀 B는흑팀
     public float Sc;//기물크기변수
-
+    
     public static bool destroyT;
-
+    
     public GameObject cTile;//클릭해서 위치 선택하는 타일
     public GameObject tileA;//하얀타일
     public GameObject tileB;//검은타일
@@ -60,8 +60,8 @@ public class Main : MonoBehaviour
             {
 
                 GameObject clickedObj = hit.transform.gameObject;//클릭된 오브젝트 넣는 변수
-             
-                
+
+
                 if (exClickTile == false) //클릭타일 없을시(즉 기물 선택 안한 시점이라면)
                 {
                     destroyT = false;
@@ -69,12 +69,12 @@ public class Main : MonoBehaviour
                     {
                         if (hit.transform.gameObject.tag == "W")//클릭된 오브젝트가 백색일시
                         {
-                            float x = float.Parse(clickedObj.transform.parent.name.Substring(0,2));//선택된 오브젝트의 가상x좌표
+                            float x = float.Parse(clickedObj.transform.parent.name.Substring(0, 2));//선택된 오브젝트의 가상x좌표
                             float z = float.Parse(clickedObj.transform.parent.name.Substring(4));//선택된 오브젝트의 가상z좌표
-                            
+
                             if (clickedObj.name == "WPawnU")//클릭된 오브젝트가 위로가는 폰이라면 
                             {
-                                UPawnMove(clickedObj,"W",x,z);
+                                UPawnMove(clickedObj, "W", x, z);
                             }//폰선택
                         }
                     }
@@ -84,67 +84,12 @@ public class Main : MonoBehaviour
                         {
                             float x = float.Parse(clickedObj.transform.parent.name.Substring(0, 2));//선택된 오브젝트의 가상x좌표
                             float z = float.Parse(clickedObj.transform.parent.name.Substring(4));//선택된 오브젝트의 가상z좌표
-                           
+
                             if (clickedObj.name == "BPawnU")//클릭된 오브젝트가 위로가는 폰이라면 
                             {
-                                if (z == 4 || z == 14)//시작지점이라면
-                                {
-                                    chosObj = clickedObj;//선택된 오브젝트를 변수에 보관
-
-                                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
-                                    ct.tag = "CT";//태그지정
-                                    ct.name = "Ctile";//이름지정
-                                    if (z + 1f == 21)//필드 나갈시
-                                    {
-                                        SetP(ct, string.Format("{0} _ {1} ", x, 1));
-                                        //ct.transform.position = new Vector3(x, 0f, 101);//위치조정
-                                        //ct.transform.parent = GameObject.Find(string.Format("{0}_{1}", x, 1)).transform;//부모조정
-
-                                    }
-                                    else //일반상황
-                                    {
-                                        SetP(ct, string.Format("{0} _ {1} ", x, z + 1));
-
-                                    }
-                                    GameObject ct2 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
-                                    ct2.tag = "CT";//태그지정
-                                    ct2.name = "Ctile";//이름지정
-                                    if (z + 2f == 21)//필드 나갈시
-                                    {
-                                        SetP(ct2, string.Format("{0} _ {1} ", x, 1));
-                                    }
-                                    else if (z + 2f == 22)//필드 나갈시
-                                    {
-                                        SetP(ct2, string.Format("{0} _ {1} ", x, 2));
-                                    }
-                                    else //일반상황
-                                    {
-                                        SetP(ct2, string.Format("{0} _ {1} ", x, z + 2));
-                                    }
-
-                                    exClickTile = true;
-                                }
-                                else
-                                {
-                                    chosObj = clickedObj;//선택된 오브젝트를 변수에 보관
-                                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
-                                    ct.tag = "CT";//태그지정
-                                    ct.name = "Ctile";//이름지정
-                                    if (z + 1f == 21)//필드 나갈시
-                                    {
-                                        SetP(ct, string.Format("{0} _ {1} ", x, 1));
-                                        //ct.transform.position = new Vector3(x, 0f, 101);//위치조정
-                                        //ct.transform.parent = GameObject.Find(string.Format("{0}_{1}", x, 1)).transform;//부모조정
-
-                                    }
-                                    else //일반상황
-                                    {
-                                        SetP(ct, string.Format("{0} _ {1} ", x, z + 1));
-
-                                    }
-                                    exClickTile = true;
-                                }
-                            }//폰선택
+                                UPawnMove(clickedObj, "B", x, z);
+                            }
+                            //폰선택
                         }
                     }
                 }
@@ -153,7 +98,7 @@ public class Main : MonoBehaviour
 
                     if (clickedObj.tag == "CT")
                     {
-                        float x = float.Parse(clickedObj.transform.parent.name.Substring(0,2));//선택된 오브젝트의 가상x좌표
+                        float x = float.Parse(clickedObj.transform.parent.name.Substring(0, 2));//선택된 오브젝트의 가상x좌표
                         float z = float.Parse(clickedObj.transform.parent.name.Substring(4));//선택된 오브젝트의 가상z좌표
                         if (clickedObj.transform.parent.GetChild(0).tag == "W" || clickedObj.transform.parent.GetChild(0).tag == "B")
                         {
@@ -166,7 +111,7 @@ public class Main : MonoBehaviour
                         //chosObj.transform.parent = clickedObj.transform.parent;
                         //선택된 기물 부모를 있는 타일로 변경
                         destroyT = true;
-                       
+
 
                         //모든 선택 타일 삭제
 
@@ -177,7 +122,7 @@ public class Main : MonoBehaviour
                     else
                     {
                         destroyT = true;
-                        
+
 
                         //모든 선택 타일 삭제
                         chosObj = null;//선택된 오브젝트 변수 비움
