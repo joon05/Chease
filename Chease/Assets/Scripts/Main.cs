@@ -76,6 +76,11 @@ public class Main : MonoBehaviour
                             {
                                 UPawnMove(clickedObj, "W", x, z);
                             }//폰선택
+                            if (clickedObj.name == "WPawnD")//클릭된 오브젝트가 위로가는 폰이라면 
+                            {
+                                
+                                DPawnMove(clickedObj, "W", x, z);
+                            }//폰선택
                         }
                     }
                     if (turn == "B")//흑 턴일때 
@@ -90,6 +95,10 @@ public class Main : MonoBehaviour
                                 UPawnMove(clickedObj, "B", x, z);
                             }
                             //폰선택
+                            if (clickedObj.name == "BPawnD")//클릭된 오브젝트가 위로가는 폰이라면 
+                            {
+                                DPawnMove(clickedObj, "B", x, z);
+                            }//폰선택
                         }
                     }
                 }
@@ -461,6 +470,9 @@ public class Main : MonoBehaviour
             }
             
         }//일반
+
+
+        //
         if (turn=="W")//백턴일때
         {
             if(x+1<9&& z+1<21)//일반
@@ -485,7 +497,7 @@ public class Main : MonoBehaviour
                    
                     }//오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
                 }
-            }
+            }//오른쪽
             else if(x+1<9&& z+1>20)//위로 초과시
             {
                 if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 1)).transform.childCount>0) //오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
@@ -508,36 +520,442 @@ public class Main : MonoBehaviour
                    
                     }//오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
                 }
-        }
-            if (x - 1 >0  && GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform.childCount > 0)
+            }
+            if (x - 1 >0  && z + 1 < 21)
             {
-
-                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform.GetChild(0).CompareTag("B"))
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform.childCount > 0) //왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
                 {
-                    //Debug.Log(GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)));
 
-                    GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
-                    ct3.tag = "CT";//태그지정
-                    ct3.name = "Ctile";//이름지정
-                    ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform;
-                    ct3.transform.position
-                    =
-                    new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
-                    //SetP(ct3, string.Format("{0} _ {1}",x+1,z+1 ));
-                    Debug.Log(string.Format("{0} _ {1}", x - 1, z + 1));
-                    exClickTile = true;
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform.GetChild(0).CompareTag("B"))
+                    {
+                      
 
-                }//오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+                       
+                        Debug.Log(string.Format("{0} _ {1}", x - 1, z + 1));
+                        exClickTile = true;
+
+                    }
+                }
             }//왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
+            else if (x - 1 >0 && z + 1 > 20)//위로 초과시
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 1)).transform.childCount > 0) //왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 1)).transform.GetChild(0).CompareTag("B"))
+                    {
+                       
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x - 1, 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+                      
+                        Debug.Log(string.Format("{0} _ {1}", x - 1, 1));
+                        exClickTile = true;
+
+                    }//왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }
         }
         else //흑턴일때
         {
-            
+            if (x + 1 < 9 && z + 1 < 21)//일반
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)).transform.childCount > 0) //오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                {
 
-               
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)).transform.GetChild(0).CompareTag("W"))
+                    {
+                        //Debug.Log(GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)));
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+                        //SetP(ct3, string.Format("{0} _ {1}",x+1,z+1 ));
+                        Debug.Log(string.Format("{0} _ {1}", x + 1, z + 1));
+                        exClickTile = true;
+
+                    }//오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }//오른쪽
+            else if (x + 1 < 9 && z + 1 > 20)//위로 초과시
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 1)).transform.childCount > 0) //오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 1)).transform.GetChild(0).CompareTag("W"))
+                    {
+                        //Debug.Log(GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)));
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x + 1, 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+                        //SetP(ct3, string.Format("{0} _ {1}",x+1,z+1 ));
+                        Debug.Log(string.Format("{0} _ {1}", x + 1, 1));
+                        exClickTile = true;
+
+                    }//오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }
+            if (x - 1 > 0 && z + 1 < 21)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform.childCount > 0) //왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform.GetChild(0).CompareTag("W"))
+                    {
+
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+
+                        Debug.Log(string.Format("{0} _ {1}", x - 1, z + 1));
+                        exClickTile = true;
+
+                    }
+                }
+            }//왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
+            else if (x - 1 > 0 && z + 1 > 20)//위로 초과시
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 1)).transform.childCount > 0) //왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 1)).transform.GetChild(0).CompareTag("W"))
+                    {
+
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x - 1, 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+
+                        Debug.Log(string.Format("{0} _ {1}", x - 1, 1));
+                        exClickTile = true;
+
+                    }//왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }
+
+
         }
+        //흑턴일때
+
+        
+     //공격타일
+    }//위로가는 폰 (좌부터 선택된 게임오브젝트,누구턴인지,xz좌표계)
+    public void DPawnMove(GameObject cO, string turn, float x, float z) 
+    {
+        chosObj = cO;//선택된 오브젝트를 변수에 보관
+
+        if (z == 2 || z == 12)//시작지점이라면
+        {
+            chosObj = cO;//선택된 오브젝트를 변수에 보관
+
+            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+            ct.tag = "CT";//태그지정
+            ct.name = "Ctile";//이름지정
+
+
+            SetP(ct, string.Format("{0} _ {1} ", x, z - 1));
+            if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
+            {
+                Destroy(ct);
+            }
+            else
+            {
+                exClickTile = true;
+                GameObject ct2 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                ct2.tag = "CT";//태그지정
+                ct2.name = "Ctile";//이름지정
+
+
+                if (z == 2) 
+                {
+                    SetP(ct2, string.Format("{0} _ {1} ", x, 20));
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, 20)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
+                    {
+                        Destroy(ct2);
+                    }
+                }
+                else 
+                {
+                    SetP(ct2, string.Format("{0} _ {1} ", x, z - 2));
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 2)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
+                    {
+                        Destroy(ct2);
+                    }
+                }
+                
+            }
+
+
+
+
+
+
+        }//시작지점이면
+        else
+        {
+            chosObj = cO;//선택된 오브젝트를 변수에 보관
+
+            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+            ct.tag = "CT";//태그지정
+            ct.name = "Ctile";//이름지정
+            if (z - 1f == 0)//필드 나갈시
+            {
+                SetP(ct, string.Format("{0} _ {1} ", x, 20));
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, 1)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
+                {
+                    Destroy(ct);
+                }
+                else
+                {
+                    exClickTile = true;
+                }
+
+
+            }
+            else //일반상황
+            {
+                SetP(ct, string.Format("{0} _ {1} ", x, z - 1));
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z + 1)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
+                {
+                    Destroy(ct);
+                }
+                else
+                {
+                    exClickTile = true;
+                }
+
+            }
+
+        }//일반
+
+
+        //
+       
+        if (turn == "W")//백턴일때
+        {
+            if (x + 1 < 9 && z - 1 > 0)//일반
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 1)).transform.childCount > 0) //오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 1)).transform.GetChild(0).CompareTag("B"))
+                    {
+                        //Debug.Log(GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)));
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+                        //SetP(ct3, string.Format("{0} _ {1}",x+1,z+1 ));
+                        Debug.Log(string.Format("{0} _ {1}", x + 1, z - 1));
+                        exClickTile = true;
+
+                    }//오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }//오른쪽
+            else if (x + 1 < 9 && z - 1 <1)//아래로 초과시
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 20)).transform.childCount > 0) //오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 20)).transform.GetChild(0).CompareTag("B"))
+                    {
+                       
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x + 1, 20)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+                        //SetP(ct3, string.Format("{0} _ {1}",x+1,z+1 ));
+                        Debug.Log(string.Format("{0} _ {1}", x + 1, 20));
+                        exClickTile = true;
+
+                    }//오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }
+            if (x - 1 > 0 && z - 1 > 0)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 1)).transform.childCount > 0) //왼쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 1)).transform.GetChild(0).CompareTag("B"))
+                    {
+
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+
+                        Debug.Log(string.Format("{0} _ {1}", x - 1, z - 1));
+                        exClickTile = true;
+
+                    }
+                }
+            }//왼쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+            else if (x - 1 > 0 && z - 1 < 1)//아래로 초과시
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 20)).transform.childCount > 0) //왼쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 20)).transform.GetChild(0).CompareTag("B"))
+                    {
+
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x - 1, 20)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+
+                        Debug.Log(string.Format("{0} _ {1}", x - 1, 20));
+                        exClickTile = true;
+
+                    }//왼쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }
+        }
+        //백턴일때
+        else //흑턴일때
+        {
+            if (x + 1 < 9 && z - 1 > 0)//일반
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 1)).transform.childCount > 0) //오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 1)).transform.GetChild(0).CompareTag("W"))
+                    {
+                        //Debug.Log(GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)));
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+                        //SetP(ct3, string.Format("{0} _ {1}",x+1,z+1 ));
+                        Debug.Log(string.Format("{0} _ {1}", x + 1, z - 1));
+                        exClickTile = true;
+
+                    }//오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }//오른쪽
+            else if (x + 1 < 9 && z - 1 < 1)//아래로 초과시
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 20)).transform.childCount > 0) //오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 20)).transform.GetChild(0).CompareTag("W"))
+                    {
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x + 1, 20)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+                        //SetP(ct3, string.Format("{0} _ {1}",x+1,z+1 ));
+                        Debug.Log(string.Format("{0} _ {1}", x + 1, 20));
+                        exClickTile = true;
+
+                    }//오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }
+            if (x - 1 > 0 && z - 1 > 0)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 1)).transform.childCount > 0) //왼쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 1)).transform.GetChild(0).CompareTag("W"))
+                    {
+
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 1)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+
+                        Debug.Log(string.Format("{0} _ {1}", x - 1, z - 1));
+                        exClickTile = true;
+
+                    }
+                }
+            }//왼쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+            else if (x - 1 > 0 && z - 1 < 1)//아래로 초과시
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 20)).transform.childCount > 0) //왼쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 20)).transform.GetChild(0).CompareTag("W"))
+                    {
+
+
+                        GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct3.tag = "CT";//태그지정
+                        ct3.name = "Ctile";//이름지정
+                        ct3.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x - 1, 20)).transform;
+                        ct3.transform.position
+                        =
+                        new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
+
+                        Debug.Log(string.Format("{0} _ {1}", x - 1, 20));
+                        exClickTile = true;
+
+                    }//왼쪽 아래 있을시(함수 하면 오류나서 수제입력)    
+                }
+            }
+
+        }
+        //흑턴일때
+
+
         //공격타일
-    }//좌부터 선택된 게임오브젝트,누구턴인지,xz좌표계
+    }//아래로 가는 폰
 
     /*public GameObject FtoS(float x,float z) 
     {
