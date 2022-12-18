@@ -79,12 +79,16 @@ public class Main : MonoBehaviour
                             if (clickedObj.name == "WPawnD")//클릭된 오브젝트가 위로가는 폰이라면 
                             {
                                 
-                                DPawnMove(clickedObj, "W", x, z);
+                                DPawnMove(clickedObj,"W",x,z);
                             }//폰선택
                             if (clickedObj.name == "WRook")//
                             {
-                                RookMove(clickedObj, "W", x, z);
+                                RookMove(clickedObj,"W",x,z);
                             }//룩선택
+                            if (clickedObj.name == "WBishop")
+                            {
+                                BishopMove(clickedObj, "W", x, z);
+                            }//비숍선택
                         }
                     }
                     if (turn == "B")//흑 턴일때 
@@ -107,6 +111,10 @@ public class Main : MonoBehaviour
                             {
                                 RookMove(clickedObj, "B", x, z);
                             }//룩선택
+                            if (clickedObj.name == "BBishop")
+                            {
+                                BishopMove(clickedObj, "B", x, z);
+                            }//비숍선택
                         }
                     }
                 }
@@ -402,7 +410,18 @@ public class Main : MonoBehaviour
         new Vector3(c.transform.parent.transform.position.x, c.transform.parent.transform.position.y, c.transform.parent.transform.position.z);
         //부모 설정 및 이동
     }//부모 설정 및 이동
-
+    public void CreatCT(float x, float z)
+    {
+        GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+        ct.tag = "CT";//태그지정
+        ct.name = "Ctile";//이름지정
+        SetP(ct, string.Format("{0} _ {1} ", x, z));
+        exClickTile = true;
+    }//이동타일생성
+ 
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////// 
+    
     public void UPawnMove(GameObject cO,string turn,float x,float z) 
     {
         chosObj = cO;//선택된 오브젝트를 변수에 보관
@@ -753,7 +772,7 @@ public class Main : MonoBehaviour
             else //일반상황
             {
                 SetP(ct, string.Format("{0} _ {1} ", x, z - 1));
-                if (GameObject.Find(string.Format("{0} _ {1} ", x, z + 1)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
                 {
                     Destroy(ct);
                 }
@@ -965,19 +984,319 @@ public class Main : MonoBehaviour
         //공격타일
     }//아래로 가는 폰
 
-    public void RookMove(GameObject cO, string turn, float x, float z) 
+    public void RookMove(GameObject cO, string turn, float x, float z)//룩이동타일 생성
     {
+        chosObj = cO;//선택된 오브젝트를 변수에 보관
+
+        for (int i=1; i< 20;i++) //위로생성
+        {
+            if (z + i < 21)//위로생성
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i)).transform.childCount == 1)
+                {
+                    if (turn == "W")//백턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i)).transform.GetChild(0).tag == "B")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//백턴
+                    else //흑턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i)).transform.GetChild(0).tag == "W")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//흑턴
+                }
+                else
+                {
+
+                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                    ct.tag = "CT";//태그지정
+                    ct.name = "Ctile";//이름지정
+                    SetP(ct, string.Format("{0} _ {1} ", x, z + i));
+                    exClickTile = true;
+
+
+
+                }
+            }//위로생성
+            else if(z + i > 20)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i-20)).transform.childCount == 1)
+                {
+                    if (turn == "W")//백턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i-20)).transform.GetChild(0).tag == "B")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i-20));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//백턴
+                    else //흑턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i-20)).transform.GetChild(0).tag == "W")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i-20));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//흑턴
+                }
+                else
+                {
+
+                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                    ct.tag = "CT";//태그지정
+                    ct.name = "Ctile";//이름지정
+                    SetP(ct, string.Format("{0} _ {1} ", x, z + i-20));
+                    exClickTile = true;
+
+
+
+                }
+            }//위로생성
+        }//위로 생성
+        for (int i=1; i< 20;i++) //아래생성
+        {
+            if (z - i > 0)//아래로생성
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.childCount == 2) 
+                {
+                    break;
+                }
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.childCount == 1)
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.GetChild(0).tag=="CT") 
+                    {
+                        break;
+                    }
+                    if (turn == "W")//백턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.GetChild(0).tag == "B")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z - i));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//백턴
+                    else //흑턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.GetChild(0).tag == "W")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z - i));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//흑턴
+                }
+                else
+                {
+
+                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                    ct.tag = "CT";//태그지정
+                    ct.name = "Ctile";//이름지정
+                    SetP(ct, string.Format("{0} _ {1} ", x, z - i));
+                    exClickTile = true;
+
+
+
+                }
+            }//아래생성
+            else if (z - i < 1)
+            {
+
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i+20)).transform.childCount == 2)
+                {
+                    break;
+                }
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z -i+ 20)).transform.childCount == 1)
+                {
+                    if (turn == "W")//백턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i+20)).transform.GetChild(0).tag == "CT")
+                        {
+                            break;
+                        }
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z -i+ 20)).transform.GetChild(0).tag == "B")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z -i+ 20));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//백턴
+                    else //흑턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z -i+ 20)).transform.GetChild(0).tag == "W")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z -i+ 20));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//흑턴
+                }
+                else
+                {
+
+                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                    ct.tag = "CT";//태그지정
+                    ct.name = "Ctile";//이름지정
+                    SetP(ct, string.Format("{0} _ {1} ", x, z -i+ 20));
+                    exClickTile = true;
+                    
+
+
+
+                }
+            }//아래로생성
+        }//아래로 생성
+        for(int i=1; i < 8; i++) 
+        {
+            if (x+i<9) 
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z )).transform.childCount==0) //빈타일
+                {
+                    CreatCT(x + i, z);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.childCount == 1) //안빈타일
+                {
+                    if (turn=="W"&& GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag=="B")//벡턴에 흑이면 
+                    {
+                        CreatCT(x + i, z);
+                        break;
+                    }
+                    else if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "W")//백턴에백이면 
+                    {
+                        break;
+                    }
+                    else if(turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "W")//흑턴에백이면
+                    {
+                        CreatCT(x + i, z);
+                        break;
+                    }
+                    else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "B")//흑턴에흑이면 
+                    {
+                        break;
+                    }
+                }//안빈타일
+                
+            }
+            else 
+            {
+                break;
+            }
+            
+                
+        }//오른쪽생성
+        for(int i = 1; i < 8; i++)
+        {
+            if (x - i > 0)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x - i, z);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.childCount == 1) //안빈타일
+                {
+                    if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.GetChild(0).tag == "B")//벡턴에 흑이면 
+                    {
+                        CreatCT(x - i, z);
+                        break;
+                    }
+                    else if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.GetChild(0).tag == "W")//백턴에백이면 
+                    {
+                        break;
+                    }
+                    else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.GetChild(0).tag == "W")//흑턴에백이면
+                    {
+                        CreatCT(x - i, z);
+                        break;
+                    }
+                    else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.GetChild(0).tag == "B")//흑턴에흑이면 
+                    {
+                        break;
+                    }
+                }//안빈타일
+
+            }
+            else
+            {
+                break;
+            }
+
+
+        }//왼쪽생성
+    }//룩이동타일생성
     
-    }
-
-    /*public GameObject FtoS(float x,float z) 
+    public void BishopMove(GameObject cO, string turn, float x, float z) 
     {
-        GameObject coordinate;
-
-        coordinate = GameObject.Find(string.Format("{0} _ {1} ",x,z));
+        chosObj = cO;//선택된 오브젝트를 변수에 보관
+        for(int i=1; i < 8; i++) 
+        {
         
-        return coordinate;
-    }//xz넣으면 타일 게임오브젝트로 변환
-    */
+        }
+    }
 }
 
