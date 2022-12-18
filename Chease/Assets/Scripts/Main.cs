@@ -81,6 +81,10 @@ public class Main : MonoBehaviour
                                 
                                 DPawnMove(clickedObj, "W", x, z);
                             }//폰선택
+                            if (clickedObj.name == "WRook")//
+                            {
+                                RookMove(clickedObj, "W", x, z);
+                            }//룩선택
                         }
                     }
                     if (turn == "B")//흑 턴일때 
@@ -99,6 +103,10 @@ public class Main : MonoBehaviour
                             {
                                 DPawnMove(clickedObj, "B", x, z);
                             }//폰선택
+                            if (clickedObj.name == "BRook")//
+                            {
+                                RookMove(clickedObj, "B", x, z);
+                            }//룩선택
                         }
                     }
                 }
@@ -956,6 +964,11 @@ public class Main : MonoBehaviour
 
         //공격타일
     }//아래로 가는 폰
+
+    public void RookMove(GameObject cO, string turn, float x, float z) 
+    {
+    
+    }
 
     /*public GameObject FtoS(float x,float z) 
     {
