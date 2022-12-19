@@ -15,9 +15,9 @@ public class Main : MonoBehaviour
      */
     public string turn;//누구턴인지 판별변수 W는흰팀 B는흑팀
     public float Sc;//기물크기변수
-    
+
     public static bool destroyT;
-    
+
     public GameObject cTile;//클릭해서 위치 선택하는 타일
     public GameObject tileA;//하얀타일
     public GameObject tileB;//검은타일
@@ -78,12 +78,12 @@ public class Main : MonoBehaviour
                             }//폰선택
                             if (clickedObj.name == "WPawnD")//클릭된 오브젝트가 위로가는 폰이라면 
                             {
-                                
-                                DPawnMove(clickedObj,"W",x,z);
+
+                                DPawnMove(clickedObj, "W", x, z);
                             }//폰선택
                             if (clickedObj.name == "WRook")//
                             {
-                                RookMove(clickedObj,"W",x,z);
+                                RookMove(clickedObj, "W", x, z);
                             }//룩선택
                             if (clickedObj.name == "WBishop")
                             {
@@ -93,6 +93,14 @@ public class Main : MonoBehaviour
                             {
                                 KnightMove(clickedObj, "W", x, z);
                             }//나이트선택
+                            if (clickedObj.name == "WQueen")
+                            {
+                                QueenMove(clickedObj, "W", x, z);
+                            }//퀸선택
+                            if (clickedObj.name == "WKing")
+                            {
+                                KingMove(clickedObj, "W", x, z);
+                            }//킹선택
                         }
                     }
                     if (turn == "B")//흑 턴일때 
@@ -123,6 +131,14 @@ public class Main : MonoBehaviour
                             {
                                 KnightMove(clickedObj, "B", x, z);
                             }//나이트선택
+                            if (clickedObj.name == "BQueen")
+                            {
+                                QueenMove(clickedObj, "B", x, z);
+                            }//퀸선택
+                            if (clickedObj.name == "BKing")
+                            {
+                                KingMove(clickedObj, "B", x, z);
+                            }//킹선택
                         }
                     }
                 }
@@ -412,9 +428,9 @@ public class Main : MonoBehaviour
     public void SetP(GameObject c, string p)
     {
         Debug.Log(string.Format("{0}", p));
-        c.transform.parent = GameObject.Find(string.Format("{0}",p)).transform;
-        c.transform.position 
-        = 
+        c.transform.parent = GameObject.Find(string.Format("{0}", p)).transform;
+        c.transform.position
+        =
         new Vector3(c.transform.parent.transform.position.x, c.transform.parent.transform.position.y, c.transform.parent.transform.position.z);
         //부모 설정 및 이동
     }//부모 설정 및 이동
@@ -426,11 +442,11 @@ public class Main : MonoBehaviour
         SetP(ct, string.Format("{0} _ {1} ", x, z));
         exClickTile = true;
     }//이동타일생성
- 
-    
+
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////// 
-    
-    public void UPawnMove(GameObject cO,string turn,float x,float z) 
+
+    public void UPawnMove(GameObject cO, string turn, float x, float z)
     {
         chosObj = cO;//선택된 오브젝트를 변수에 보관
 
@@ -441,14 +457,14 @@ public class Main : MonoBehaviour
             GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
             ct.tag = "CT";//태그지정
             ct.name = "Ctile";//이름지정
-            
-           
+
+
             SetP(ct, string.Format("{0} _ {1} ", x, z + 1));
-            if (GameObject.Find(string.Format("{0} _ {1} ", x, z+1)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
+            if (GameObject.Find(string.Format("{0} _ {1} ", x, z + 1)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
             {
                 Destroy(ct);
             }
-            else 
+            else
             {
                 exClickTile = true;
                 GameObject ct2 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
@@ -463,11 +479,11 @@ public class Main : MonoBehaviour
                 }
             }
 
-            
-            
-           
-        
-            
+
+
+
+
+
         }//시작지점이면
         else
         {
@@ -483,11 +499,11 @@ public class Main : MonoBehaviour
                 {
                     Destroy(ct);
                 }
-                else 
+                else
                 {
                     exClickTile = true;
                 }
-                
+
 
             }
             else //일반상황
@@ -497,25 +513,25 @@ public class Main : MonoBehaviour
                 {
                     Destroy(ct);
                 }
-                else 
+                else
                 {
                     exClickTile = true;
                 }
 
             }
-            
+
         }//일반
 
 
         //
-        if (turn=="W")//백턴일때
+        if (turn == "W")//백턴일때
         {
-            if(x+1<9&& z+1<21)//일반
+            if (x + 1 < 9 && z + 1 < 21)//일반
             {
-                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)).transform.childCount>0) //오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)).transform.childCount > 0) //오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
                 {
 
-                    if (GameObject.Find(string.Format("{0} _ {1} ", x+1, z+1)).transform.GetChild(0).CompareTag("B"))
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)).transform.GetChild(0).CompareTag("B"))
                     {
                         //Debug.Log(GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)));
 
@@ -529,16 +545,16 @@ public class Main : MonoBehaviour
                         //SetP(ct3, string.Format("{0} _ {1}",x+1,z+1 ));
                         Debug.Log(string.Format("{0} _ {1}", x + 1, z + 1));
                         exClickTile = true;
-                   
+
                     }//오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
                 }
             }//오른쪽
-            else if(x+1<9&& z+1>20)//위로 초과시
+            else if (x + 1 < 9 && z + 1 > 20)//위로 초과시
             {
-                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 1)).transform.childCount>0) //오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 1)).transform.childCount > 0) //오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
                 {
 
-                    if (GameObject.Find(string.Format("{0} _ {1} ", x+1, 1)).transform.GetChild(0).CompareTag("B"))
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 1)).transform.GetChild(0).CompareTag("B"))
                     {
                         //Debug.Log(GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 1)));
 
@@ -552,18 +568,18 @@ public class Main : MonoBehaviour
                         //SetP(ct3, string.Format("{0} _ {1}",x+1,z+1 ));
                         Debug.Log(string.Format("{0} _ {1}", x + 1, 1));
                         exClickTile = true;
-                   
+
                     }//오른쪽 위 있을시(함수 하면 오류나서 수제입력)    
                 }
             }
-            if (x - 1 >0  && z + 1 < 21)
+            if (x - 1 > 0 && z + 1 < 21)
             {
                 if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform.childCount > 0) //왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
                 {
 
                     if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 1)).transform.GetChild(0).CompareTag("B"))
                     {
-                      
+
 
                         GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
                         ct3.tag = "CT";//태그지정
@@ -572,21 +588,21 @@ public class Main : MonoBehaviour
                         ct3.transform.position
                         =
                         new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
-                       
+
                         Debug.Log(string.Format("{0} _ {1}", x - 1, z + 1));
                         exClickTile = true;
 
                     }
                 }
             }//왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
-            else if (x - 1 >0 && z + 1 > 20)//위로 초과시
+            else if (x - 1 > 0 && z + 1 > 20)//위로 초과시
             {
                 if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 1)).transform.childCount > 0) //왼쪽 위 있을시(함수 하면 오류나서 수제입력)    
                 {
 
                     if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, 1)).transform.GetChild(0).CompareTag("B"))
                     {
-                       
+
 
                         GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
                         ct3.tag = "CT";//태그지정
@@ -595,7 +611,7 @@ public class Main : MonoBehaviour
                         ct3.transform.position
                         =
                         new Vector3(ct3.transform.parent.transform.position.x, ct3.transform.parent.transform.position.y, ct3.transform.parent.transform.position.z);
-                      
+
                         Debug.Log(string.Format("{0} _ {1}", x - 1, 1));
                         exClickTile = true;
 
@@ -702,10 +718,10 @@ public class Main : MonoBehaviour
         }
         //흑턴일때
 
-        
-     //공격타일
+
+        //공격타일
     }//위로가는 폰 (좌부터 선택된 게임오브젝트,누구턴인지,xz좌표계)
-    public void DPawnMove(GameObject cO, string turn, float x, float z) 
+    public void DPawnMove(GameObject cO, string turn, float x, float z)
     {
         chosObj = cO;//선택된 오브젝트를 변수에 보관
 
@@ -731,7 +747,7 @@ public class Main : MonoBehaviour
                 ct2.name = "Ctile";//이름지정
 
 
-                if (z == 2) 
+                if (z == 2)
                 {
                     SetP(ct2, string.Format("{0} _ {1} ", x, 20));
                     if (GameObject.Find(string.Format("{0} _ {1} ", x, 20)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
@@ -739,7 +755,7 @@ public class Main : MonoBehaviour
                         Destroy(ct2);
                     }
                 }
-                else 
+                else
                 {
                     SetP(ct2, string.Format("{0} _ {1} ", x, z - 2));
                     if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 2)).transform.childCount == 2)//만약 생성된 곳에 기물이 있을경우 이동타일 삭제 
@@ -747,7 +763,7 @@ public class Main : MonoBehaviour
                         Destroy(ct2);
                     }
                 }
-                
+
             }
 
 
@@ -795,7 +811,7 @@ public class Main : MonoBehaviour
 
 
         //
-       
+
         if (turn == "W")//백턴일때
         {
             if (x + 1 < 9 && z - 1 > 0)//일반
@@ -821,14 +837,14 @@ public class Main : MonoBehaviour
                     }//오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
                 }
             }//오른쪽
-            else if (x + 1 < 9 && z - 1 <1)//아래로 초과시
+            else if (x + 1 < 9 && z - 1 < 1)//아래로 초과시
             {
                 if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 20)).transform.childCount > 0) //오른쪽 아래 있을시(함수 하면 오류나서 수제입력)    
                 {
 
                     if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, 20)).transform.GetChild(0).CompareTag("B"))
                     {
-                       
+
                         GameObject ct3 = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
                         ct3.tag = "CT";//태그지정
                         ct3.name = "Ctile";//이름지정
@@ -996,7 +1012,7 @@ public class Main : MonoBehaviour
     {
         chosObj = cO;//선택된 오브젝트를 변수에 보관
 
-        for (int i=1; i< 20;i++) //위로생성
+        for (int i = 1; i < 20; i++) //위로생성
         {
             if (z + i < 21)//위로생성
             {
@@ -1048,18 +1064,18 @@ public class Main : MonoBehaviour
 
                 }
             }//위로생성
-            else if(z + i > 20)
+            else if (z + i > 20)
             {
-                if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i-20)).transform.childCount == 1)
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i - 20)).transform.childCount == 1)
                 {
                     if (turn == "W")//백턴
                     {
-                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i-20)).transform.GetChild(0).tag == "B")
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i - 20)).transform.GetChild(0).tag == "B")
                         {
                             GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
                             ct.tag = "CT";//태그지정
                             ct.name = "Ctile";//이름지정
-                            SetP(ct, string.Format("{0} _ {1} ", x, z + i-20));
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i - 20));
                             exClickTile = true;
                             break;
                         }
@@ -1070,12 +1086,12 @@ public class Main : MonoBehaviour
                     }//백턴
                     else //흑턴
                     {
-                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i-20)).transform.GetChild(0).tag == "W")
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i - 20)).transform.GetChild(0).tag == "W")
                         {
                             GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
                             ct.tag = "CT";//태그지정
                             ct.name = "Ctile";//이름지정
-                            SetP(ct, string.Format("{0} _ {1} ", x, z + i-20));
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i - 20));
                             exClickTile = true;
                             break;
                         }
@@ -1091,7 +1107,7 @@ public class Main : MonoBehaviour
                     GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
                     ct.tag = "CT";//태그지정
                     ct.name = "Ctile";//이름지정
-                    SetP(ct, string.Format("{0} _ {1} ", x, z + i-20));
+                    SetP(ct, string.Format("{0} _ {1} ", x, z + i - 20));
                     exClickTile = true;
 
 
@@ -1099,17 +1115,17 @@ public class Main : MonoBehaviour
                 }
             }//위로생성
         }//위로 생성
-        for (int i=1; i< 20;i++) //아래생성
+        for (int i = 1; i < 20; i++) //아래생성
         {
             if (z - i > 0)//아래로생성
             {
-                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.childCount == 2) 
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.childCount == 2)
                 {
                     break;
                 }
                 if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.childCount == 1)
                 {
-                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.GetChild(0).tag=="CT") 
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.GetChild(0).tag == "CT")
                     {
                         break;
                     }
@@ -1162,11 +1178,11 @@ public class Main : MonoBehaviour
             else if (z - i < 1)
             {
 
-                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i+20)).transform.childCount == 2)
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.childCount == 2)
                 {
                     break;
                 }
-                if (GameObject.Find(string.Format("{0} _ {1} ", x, z -i+ 20)).transform.childCount == 1)
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.childCount == 1)
                 {
                     if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.GetChild(0).tag == "CT")
                     {
@@ -1174,13 +1190,13 @@ public class Main : MonoBehaviour
                     }
                     if (turn == "W")//백턴
                     {
-                       
-                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z -i+ 20)).transform.GetChild(0).tag == "B")
+
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.GetChild(0).tag == "B")
                         {
                             GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
                             ct.tag = "CT";//태그지정
                             ct.name = "Ctile";//이름지정
-                            SetP(ct, string.Format("{0} _ {1} ", x, z -i+ 20));
+                            SetP(ct, string.Format("{0} _ {1} ", x, z - i + 20));
                             exClickTile = true;
                             break;
                         }
@@ -1191,12 +1207,12 @@ public class Main : MonoBehaviour
                     }//백턴
                     else //흑턴
                     {
-                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z -i+ 20)).transform.GetChild(0).tag == "W")
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.GetChild(0).tag == "W")
                         {
                             GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
                             ct.tag = "CT";//태그지정
                             ct.name = "Ctile";//이름지정
-                            SetP(ct, string.Format("{0} _ {1} ", x, z -i+ 20));
+                            SetP(ct, string.Format("{0} _ {1} ", x, z - i + 20));
                             exClickTile = true;
                             break;
                         }
@@ -1212,26 +1228,26 @@ public class Main : MonoBehaviour
                     GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
                     ct.tag = "CT";//태그지정
                     ct.name = "Ctile";//이름지정
-                    SetP(ct, string.Format("{0} _ {1} ", x, z -i+ 20));
+                    SetP(ct, string.Format("{0} _ {1} ", x, z - i + 20));
                     exClickTile = true;
-                    
+
 
 
 
                 }
             }//아래로생성
         }//아래로 생성
-        for(int i=1; i < 8; i++) 
+        for (int i = 1; i < 8; i++)
         {
-            if (x+i<9) 
+            if (x + i < 9)
             {
-                if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z )).transform.childCount==0) //빈타일
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.childCount == 0) //빈타일
                 {
                     CreatCT(x + i, z);
                 }//빈타일
                 else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.childCount == 1) //안빈타일
                 {
-                    if (turn=="W"&& GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag=="B")//벡턴에 흑이면 
+                    if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "B")//벡턴에 흑이면 
                     {
                         CreatCT(x + i, z);
                         break;
@@ -1240,7 +1256,7 @@ public class Main : MonoBehaviour
                     {
                         break;
                     }
-                    else if(turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "W")//흑턴에백이면
+                    else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "W")//흑턴에백이면
                     {
                         CreatCT(x + i, z);
                         break;
@@ -1250,16 +1266,16 @@ public class Main : MonoBehaviour
                         break;
                     }
                 }//안빈타일
-                
+
             }
-            else 
+            else
             {
                 break;
             }
-            
-                
+
+
         }//오른쪽생성
-        for(int i = 1; i < 8; i++)
+        for (int i = 1; i < 8; i++)
         {
             if (x - i > 0)
             {
@@ -1298,35 +1314,35 @@ public class Main : MonoBehaviour
 
         }//왼쪽생성
     }//룩이동타일생성
-    
-    public void BishopMove(GameObject cO, string turn, float x, float z) 
+
+    public void BishopMove(GameObject cO, string turn, float x, float z)
     {
         chosObj = cO;//선택된 오브젝트를 변수에 보관
-        for(int i=1; i < 8; i++)//오른쪽위 생성
+        for (int i = 1; i < 8; i++)//오른쪽위 생성
         {
-            if (z+i<21) 
+            if (z + i < 21)
             {
-                if (x + i > 8) 
+                if (x + i > 8)
                 {
                     break;
-                    
+
                 }
-                else 
+                else
                 {
-                    if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z+i)).transform.childCount == 0) //빈타일
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i)).transform.childCount == 0) //빈타일
                     {
-                        CreatCT(x + i, z+i);
+                        CreatCT(x + i, z + i);
                     }//빈타일
-                    else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i)).transform.childCount == 1) 
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i)).transform.childCount == 1)
                     {
-                        if (turn=="W")
+                        if (turn == "W")
                         {
                             if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i)).transform.GetChild(0).tag == "B")
                             {
                                 CreatCT(x + i, z + i);
                                 break;
                             }
-                            else 
+                            else
                             {
                                 break;
                             }
@@ -1344,29 +1360,29 @@ public class Main : MonoBehaviour
                             }
                         }
                     }
-                   
+
                 }
             }
-            else if (z+i>20) 
+            else if (z + i > 20)
             {
                 if (x + i > 8)
                 {
                     break;
 
                 }
-                else 
+                else
                 {
-                    if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i-20)).transform.childCount == 0) //빈타일
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i - 20)).transform.childCount == 0) //빈타일
                     {
-                        CreatCT(x + i, z + i-20);
+                        CreatCT(x + i, z + i - 20);
                     }//빈타일
-                    else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i-20)).transform.childCount == 1)
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i - 20)).transform.childCount == 1)
                     {
                         if (turn == "W")
                         {
-                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i-20)).transform.GetChild(0).tag == "B")
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i - 20)).transform.GetChild(0).tag == "B")
                             {
-                                CreatCT(x + i, z + i-20);
+                                CreatCT(x + i, z + i - 20);
                                 break;
                             }
                             else
@@ -1376,9 +1392,9 @@ public class Main : MonoBehaviour
                         }
                         if (turn == "B")
                         {
-                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i-20)).transform.GetChild(0).tag == "W")
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i - 20)).transform.GetChild(0).tag == "W")
                             {
-                                CreatCT(x + i, z + i-20);
+                                CreatCT(x + i, z + i - 20);
                                 break;
                             }
                             else
@@ -1444,17 +1460,17 @@ public class Main : MonoBehaviour
                 }
                 else
                 {
-                    if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i-20)).transform.childCount == 0) //빈타일
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i - 20)).transform.childCount == 0) //빈타일
                     {
-                        CreatCT(x - i, z + i-20);
+                        CreatCT(x - i, z + i - 20);
                     }//빈타일
-                    else if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i-20)).transform.childCount == 1)
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i - 20)).transform.childCount == 1)
                     {
                         if (turn == "W")
                         {
-                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i-20)).transform.GetChild(0).tag == "B")
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i - 20)).transform.GetChild(0).tag == "B")
                             {
-                                CreatCT(x - i, z + i-20);
+                                CreatCT(x - i, z + i - 20);
                                 break;
                             }
                             else
@@ -1464,9 +1480,9 @@ public class Main : MonoBehaviour
                         }
                         if (turn == "B")
                         {
-                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i-20)).transform.GetChild(0).tag == "W")
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i - 20)).transform.GetChild(0).tag == "W")
                             {
-                                CreatCT(x - i, z + i-20);
+                                CreatCT(x - i, z + i - 20);
                                 break;
                             }
                             else
@@ -1524,7 +1540,7 @@ public class Main : MonoBehaviour
 
                 }
             }
-            else if (z -i < 1)
+            else if (z - i < 1)
             {
                 if (x + i > 8)
                 {
@@ -1535,7 +1551,7 @@ public class Main : MonoBehaviour
                 {
                     if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i + 20)).transform.childCount == 0) //빈타일
                     {
-                        CreatCT(x + i, z - i +20);
+                        CreatCT(x + i, z - i + 20);
                     }//빈타일
                     else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i + 20)).transform.childCount == 1)
                     {
@@ -1570,7 +1586,7 @@ public class Main : MonoBehaviour
 
         for (int i = 1; i < 8; i++)//왼쪽아래 생성
         {
-            if (z - i >0)
+            if (z - i > 0)
             {
                 if (x - i < 1)
                 {
@@ -1599,7 +1615,7 @@ public class Main : MonoBehaviour
                         }
                         if (turn == "B")
                         {
-                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z -i)).transform.GetChild(0).tag == "W")
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i)).transform.GetChild(0).tag == "W")
                             {
                                 CreatCT(x - i, z - i);
                                 break;
@@ -1612,7 +1628,7 @@ public class Main : MonoBehaviour
                     }
                 }
             }
-            else if (z - i <1)
+            else if (z - i < 1)
             {
                 if (x - i < 1)
                 {
@@ -1621,7 +1637,7 @@ public class Main : MonoBehaviour
                 }
                 else
                 {
-                    if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i+ 20)).transform.childCount == 0) //빈타일
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i + 20)).transform.childCount == 0) //빈타일
                     {
                         CreatCT(x - i, z - i + 20);
                     }//빈타일
@@ -1629,7 +1645,7 @@ public class Main : MonoBehaviour
                     {
                         if (turn == "W")
                         {
-                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i +20)).transform.GetChild(0).tag == "B")
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i + 20)).transform.GetChild(0).tag == "B")
                             {
                                 CreatCT(x - i, z - i + 20);
                                 break;
@@ -1661,41 +1677,42 @@ public class Main : MonoBehaviour
     {
         chosObj = cO;
         ////////////////////////오른쪽에서 첫번째 2개
-        if(x+2>8) 
+        ////////////////////////오른쪽에서 첫번째 2개
+        if (x + 2 > 8)
         {
         }
-        else if (x+2<9) 
+        else if (x + 2 < 9)
         {
-            if (z+1<21) 
+            if (z + 1 < 21)
             {
                 if (GameObject.Find(string.Format("{0} _ {1} ", x + 2, z + 1)).transform.childCount == 0)
                 {
                     CreatCT(x + 2, z + 1);
                 }
-                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 2, z + 1)).transform.childCount == 1) 
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 2, z + 1)).transform.childCount == 1)
                 {
                     if (turn == "W")
                     {
                         if (GameObject.Find(string.Format("{0} _ {1} ", x + 2, z + 1)).transform.GetChild(0).tag == "B")
                         {
                             CreatCT(x + 2, z + 1);
-                           
+
                         }
-                      
+
                     }
                     if (turn == "B")
                     {
                         if (GameObject.Find(string.Format("{0} _ {1} ", x + 2, z + 1)).transform.GetChild(0).tag == "W")
                         {
                             CreatCT(x + 2, z + 1);
-                        
+
                         }
-                       
+
                     }
                 }
-                
+
             }
-            else if (z + 1 > 20) 
+            else if (z + 1 > 20)
             {
                 if (GameObject.Find(string.Format("{0} _ {1} ", x + 2, 1)).transform.childCount == 0)
                 {
@@ -1780,13 +1797,1661 @@ public class Main : MonoBehaviour
                 }
             }
         }
-        ////////////////////////
+        ////////////////////////왼쪽에서 첫번째 2개
+        ////////////////////////왼쪽에서 첫번째 2개
+        if (x - 2 < 1)
+        {
+        }
+        else if (x - 2 > 0)
+        {
+            if (z + 1 < 21)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, z + 1)).transform.childCount == 0)
+                {
+                    CreatCT(x - 2, z + 1);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, z + 1)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, z + 1)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x - 2, z + 1);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, z + 1)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x - 2, z + 1);
+
+                        }
+
+                    }
+                }
+
+            }
+            else if (z + 1 > 20)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 1)).transform.childCount == 0)
+                {
+                    CreatCT(x - 2, 1);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 1)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 1)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x - 2, 1);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 1)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x - 2, 1);
+
+                        }
+
+                    }
+                }
+            }
+            if (z - 1 > 0)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, z - 1)).transform.childCount == 0)
+                {
+                    CreatCT(x - 2, z - 1);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, z - 1)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, z - 1)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x - 2, z - 1);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, z - 1)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x - 2, z - 1);
+
+                        }
+
+                    }
+                }
+            }
+            else if (z - 1 < 1)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 20)).transform.childCount == 0)
+                {
+                    CreatCT(x + 2, 20);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 20)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 20)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x - 2, 20);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 20)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x - 2, 20);
+
+                        }
+
+                    }
+                }
+            }
+        }
+        ////////////////////////오른쪽에서 두번째 2개
+        ////////////////////////오른쪽에서 두번째 2개
+        if (x + 1 > 8)
+        {
+        }
+        else if (x + 1 < 9)
+        {
+            if (z + 2 < 21)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 2)).transform.childCount == 0)
+                {
+                    CreatCT(x + 1, z + 2);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 2)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 2)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x + 1, z + 2);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 2)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x + 1, z + 2);
+
+                        }
+
+                    }
+                }
+
+            }
+            else if (z + 2 > 20)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 19)).transform.childCount == 0)
+                {
+                    CreatCT(x + 1, z - 19);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 19)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 19)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x + 1, z - 19);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 19)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x + 1, z - 19);
+
+                        }
+
+                    }
+                }
+            }
+            if (z - 2 > 0)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 2)).transform.childCount == 0)
+                {
+                    CreatCT(x + 1, z - 2);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 2)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 2)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x + 1, z - 2);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 2)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x + 1, z - 2);
+
+                        }
+
+                    }
+                }
+            }
+            else if (z - 2 < 1)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 18)).transform.childCount == 0)
+                {
+                    CreatCT(x + 1, z + 18);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 18)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 18)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x + 1, z + 18);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z + 18)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x + 1, z + 18);
+
+                        }
+
+                    }
+                }
+            }
+        }
+        ///////////////////////왼쪽에서 두번째2개
+        ///////////////////////왼쪽에서 두번째2개
+        if (x - 1 < 1)
+        {
+        }
+        else if (x - 1 > 0)
+        {
+            if (z + 2 < 21)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 2)).transform.childCount == 0)
+                {
+                    CreatCT(x - 1, z + 2);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 2)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 2)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x - 1, z + 2);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 2)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x - 1, z + 2);
+
+                        }
+
+                    }
+                }
+
+            }
+            else if (z + 2 > 20)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 19)).transform.childCount == 0)
+                {
+                    CreatCT(x - 1, z - 19);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 19)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 19)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x - 1, z - 19);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 19)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x - 1, z - 19);
+
+                        }
+
+                    }
+                }
+            }
+            if (z - 2 > 0)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 2)).transform.childCount == 0)
+                {
+                    CreatCT(x - 1, z - 2);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 2)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 2)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x - 1, z - 2);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 2)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x - 1, z - 2);
+
+                        }
+
+                    }
+                }
+            }
+            else if (z - 2 < 1)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 18)).transform.childCount == 0)
+                {
+                    CreatCT(x - 1, z + 18);
+                }
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 18)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 18)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x - 1, z + 18);
+
+                        }
+
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z + 18)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x - 1, z + 18);
+
+                        }
+
+                    }
+                }
+            }
+        }
+        //////////////////////////////////////////
     }
 
+    public void QueenMove(GameObject cO, string turn, float x, float z)//퀸이동타일생성
+    {
+        chosObj = cO;//선택된 오브젝트를 변수에 보관
+        for (int i = 1; i < 20; i++) //위로생성
+        {
+            if (z + i < 21)//위로생성
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i)).transform.childCount == 1)
+                {
+                    if (turn == "W")//백턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i)).transform.GetChild(0).tag == "B")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//백턴
+                    else //흑턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i)).transform.GetChild(0).tag == "W")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//흑턴
+                }
+                else
+                {
+
+                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                    ct.tag = "CT";//태그지정
+                    ct.name = "Ctile";//이름지정
+                    SetP(ct, string.Format("{0} _ {1} ", x, z + i));
+                    exClickTile = true;
+
+
+
+                }
+            }//위로생성
+            else if (z + i > 20)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i - 20)).transform.childCount == 1)
+                {
+                    if (turn == "W")//백턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i - 20)).transform.GetChild(0).tag == "B")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i - 20));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//백턴
+                    else //흑턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z + i - 20)).transform.GetChild(0).tag == "W")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z + i - 20));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//흑턴
+                }
+                else
+                {
+
+                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                    ct.tag = "CT";//태그지정
+                    ct.name = "Ctile";//이름지정
+                    SetP(ct, string.Format("{0} _ {1} ", x, z + i - 20));
+                    exClickTile = true;
+
+
+
+                }
+            }//위로생성
+        }//위로 생성
+        for (int i = 1; i < 20; i++) //아래생성
+        {
+            if (z - i > 0)//아래로생성
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.childCount == 2)
+                {
+                    break;
+                }
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.childCount == 1)
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.GetChild(0).tag == "CT")
+                    {
+                        break;
+                    }
+                    if (turn == "W")//백턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.GetChild(0).tag == "B")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z - i));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//백턴
+                    else //흑턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i)).transform.GetChild(0).tag == "W")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z - i));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//흑턴
+                }
+                else
+                {
+
+                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                    ct.tag = "CT";//태그지정
+                    ct.name = "Ctile";//이름지정
+                    SetP(ct, string.Format("{0} _ {1} ", x, z - i));
+                    exClickTile = true;
+
+
+
+                }
+            }//아래생성
+            else if (z - i < 1)
+            {
+
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.childCount == 2)
+                {
+                    break;
+                }
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.childCount == 1)
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.GetChild(0).tag == "CT")
+                    {
+                        break;
+                    }
+                    if (turn == "W")//백턴
+                    {
+
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.GetChild(0).tag == "B")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z - i + 20));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//백턴
+                    else //흑턴
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x, z - i + 20)).transform.GetChild(0).tag == "W")
+                        {
+                            GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                            ct.tag = "CT";//태그지정
+                            ct.name = "Ctile";//이름지정
+                            SetP(ct, string.Format("{0} _ {1} ", x, z - i + 20));
+                            exClickTile = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }//흑턴
+                }
+                else
+                {
+
+                    GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                    ct.tag = "CT";//태그지정
+                    ct.name = "Ctile";//이름지정
+                    SetP(ct, string.Format("{0} _ {1} ", x, z - i + 20));
+                    exClickTile = true;
 
 
 
 
+                }
+            }//아래로생성
+        }//아래로 생성
+        for (int i = 1; i < 8; i++)
+        {
+            if (x + i < 9)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x + i, z);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.childCount == 1) //안빈타일
+                {
+                    if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "B")//벡턴에 흑이면 
+                    {
+                        CreatCT(x + i, z);
+                        break;
+                    }
+                    else if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "W")//백턴에백이면 
+                    {
+                        break;
+                    }
+                    else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "W")//흑턴에백이면
+                    {
+                        CreatCT(x + i, z);
+                        break;
+                    }
+                    else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x + i, z)).transform.GetChild(0).tag == "B")//흑턴에흑이면 
+                    {
+                        break;
+                    }
+                }//안빈타일
 
+            }
+            else
+            {
+                break;
+            }
+
+
+        }//오른쪽생성
+        for (int i = 1; i < 8; i++)
+        {
+            if (x - i > 0)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x - i, z);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.childCount == 1) //안빈타일
+                {
+                    if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.GetChild(0).tag == "B")//벡턴에 흑이면 
+                    {
+                        CreatCT(x - i, z);
+                        break;
+                    }
+                    else if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.GetChild(0).tag == "W")//백턴에백이면 
+                    {
+                        break;
+                    }
+                    else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.GetChild(0).tag == "W")//흑턴에백이면
+                    {
+                        CreatCT(x - i, z);
+                        break;
+                    }
+                    else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x - i, z)).transform.GetChild(0).tag == "B")//흑턴에흑이면 
+                    {
+                        break;
+                    }
+                }//안빈타일
+
+            }
+            else
+            {
+                break;
+            }
+
+
+        }//왼쪽생성
+        for (int i = 1; i < 8; i++)//오른쪽위 생성
+        {
+            if (z + i < 21)
+            {
+                if (x + i > 8)
+                {
+                    break;
+
+                }
+                else
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i)).transform.childCount == 0) //빈타일
+                    {
+                        CreatCT(x + i, z + i);
+                    }//빈타일
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i)).transform.childCount == 1)
+                    {
+                        if (turn == "W")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i)).transform.GetChild(0).tag == "B")
+                            {
+                                CreatCT(x + i, z + i);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (turn == "B")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i)).transform.GetChild(0).tag == "W")
+                            {
+                                CreatCT(x + i, z + i);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                }
+            }
+            else if (z + i > 20)
+            {
+                if (x + i > 8)
+                {
+                    break;
+
+                }
+                else
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i - 20)).transform.childCount == 0) //빈타일
+                    {
+                        CreatCT(x + i, z + i - 20);
+                    }//빈타일
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i - 20)).transform.childCount == 1)
+                    {
+                        if (turn == "W")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i - 20)).transform.GetChild(0).tag == "B")
+                            {
+                                CreatCT(x + i, z + i - 20);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (turn == "B")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z + i - 20)).transform.GetChild(0).tag == "W")
+                            {
+                                CreatCT(x + i, z + i - 20);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }//오른쪽위 생성
+
+        for (int i = 1; i < 8; i++)//왼쪽위 생성
+        {
+            if (z + i < 21)
+            {
+                if (x - i < 1)
+                {
+                    break;
+
+                }
+                else
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i)).transform.childCount == 0) //빈타일
+                    {
+                        CreatCT(x - i, z + i);
+                    }//빈타일
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i)).transform.childCount == 1)
+                    {
+                        if (turn == "W")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i)).transform.GetChild(0).tag == "B")
+                            {
+                                CreatCT(x - i, z + i);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (turn == "B")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i)).transform.GetChild(0).tag == "W")
+                            {
+                                CreatCT(x - i, z + i);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (z + i > 20)
+            {
+                if (x - i < 1)
+                {
+                    break;
+
+                }
+                else
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i - 20)).transform.childCount == 0) //빈타일
+                    {
+                        CreatCT(x - i, z + i - 20);
+                    }//빈타일
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i - 20)).transform.childCount == 1)
+                    {
+                        if (turn == "W")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i - 20)).transform.GetChild(0).tag == "B")
+                            {
+                                CreatCT(x - i, z + i - 20);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (turn == "B")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z + i - 20)).transform.GetChild(0).tag == "W")
+                            {
+                                CreatCT(x - i, z + i - 20);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }//왼쪽위 생성
+
+        for (int i = 1; i < 8; i++)//오른쪽아래 생성
+        {
+            if (z - i > 0)
+            {
+                if (x + i > 8)
+                {
+                    break;
+
+                }
+                else
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i)).transform.childCount == 0) //빈타일
+                    {
+                        CreatCT(x + i, z - i);
+                    }//빈타일
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i)).transform.childCount == 1)
+                    {
+                        if (turn == "W")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i)).transform.GetChild(0).tag == "B")
+                            {
+                                CreatCT(x + i, z - i);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (turn == "B")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i)).transform.GetChild(0).tag == "W")
+                            {
+                                CreatCT(x + i, z - i);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                }
+            }
+            else if (z - i < 1)
+            {
+                if (x + i > 8)
+                {
+                    break;
+
+                }
+                else
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i + 20)).transform.childCount == 0) //빈타일
+                    {
+                        CreatCT(x + i, z - i + 20);
+                    }//빈타일
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i + 20)).transform.childCount == 1)
+                    {
+                        if (turn == "W")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i + 20)).transform.GetChild(0).tag == "B")
+                            {
+                                CreatCT(x + i, z - i + 20);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (turn == "B")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x + i, z - i + 20)).transform.GetChild(0).tag == "W")
+                            {
+                                CreatCT(x + i, z - i + 20);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }//오른쪽아래 생성
+
+        for (int i = 1; i < 8; i++)//왼쪽아래 생성
+        {
+            if (z - i > 0)
+            {
+                if (x - i < 1)
+                {
+                    break;
+
+                }
+                else
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i)).transform.childCount == 0) //빈타일
+                    {
+                        CreatCT(x - i, z - i);
+                    }//빈타일
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i)).transform.childCount == 1)
+                    {
+                        if (turn == "W")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i)).transform.GetChild(0).tag == "B")
+                            {
+                                CreatCT(x - i, z - i);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (turn == "B")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i)).transform.GetChild(0).tag == "W")
+                            {
+                                CreatCT(x - i, z - i);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (z - i < 1)
+            {
+                if (x - i < 1)
+                {
+                    break;
+
+                }
+                else
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i + 20)).transform.childCount == 0) //빈타일
+                    {
+                        CreatCT(x - i, z - i + 20);
+                    }//빈타일
+                    else if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i + 20)).transform.childCount == 1)
+                    {
+                        if (turn == "W")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i + 20)).transform.GetChild(0).tag == "B")
+                            {
+                                CreatCT(x - i, z - i + 20);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        if (turn == "B")
+                        {
+                            if (GameObject.Find(string.Format("{0} _ {1} ", x - i, z - i + 20)).transform.GetChild(0).tag == "W")
+                            {
+                                CreatCT(x - i, z - i + 20);
+                                break;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }//왼쪽아래 생성
+    }
+
+    public void KingMove(GameObject cO, string turn, float x, float z)
+    {
+        chosObj = cO;//선택된 오브젝트를 변수에 보관
+        ///////////
+        if (z + 1 < 21)//위로생성
+        {
+            if (GameObject.Find(string.Format("{0} _ {1} ", x, z + 1)).transform.childCount == 1)
+            {
+                if (turn == "W")//백턴
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z + 1)).transform.GetChild(0).tag == "B")
+                    {
+                        GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct.tag = "CT";//태그지정
+                        ct.name = "Ctile";//이름지정
+                        SetP(ct, string.Format("{0} _ {1} ", x, z + 1));
+                        exClickTile = true;
+
+                    }
+                    else
+                    {
+
+                    }
+                }//백턴
+                else //흑턴
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z + 1)).transform.GetChild(0).tag == "W")
+                    {
+                        GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct.tag = "CT";//태그지정
+                        ct.name = "Ctile";//이름지정
+                        SetP(ct, string.Format("{0} _ {1} ", x, z + 1));
+                        exClickTile = true;
+
+                    }
+                    else
+                    {
+
+                    }
+                }//흑턴
+            }
+            else
+            {
+
+                GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                ct.tag = "CT";//태그지정
+                ct.name = "Ctile";//이름지정
+                SetP(ct, string.Format("{0} _ {1} ", x, z + 1));
+                exClickTile = true;
+
+
+
+            }
+        }//위로생성
+        else if (z + 1 > 20)
+        {
+            if (GameObject.Find(string.Format("{0} _ {1} ", x, z + 1 - 20)).transform.childCount == 1)
+            {
+                if (turn == "W")//백턴
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z + 1 - 20)).transform.GetChild(0).tag == "B")
+                    {
+                        GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct.tag = "CT";//태그지정
+                        ct.name = "Ctile";//이름지정
+                        SetP(ct, string.Format("{0} _ {1} ", x, z + 1 - 20));
+                        exClickTile = true;
+
+                    }
+                    else
+                    {
+
+                    }
+                }//백턴
+                else //흑턴
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z + 1 - 20)).transform.GetChild(0).tag == "W")
+                    {
+                        GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct.tag = "CT";//태그지정
+                        ct.name = "Ctile";//이름지정
+                        SetP(ct, string.Format("{0} _ {1} ", x, z + 1 - 20));
+                        exClickTile = true;
+
+                    }
+                    else
+                    {
+
+                    }
+                }//흑턴
+            }
+            else
+            {
+
+                GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                ct.tag = "CT";//태그지정
+                ct.name = "Ctile";//이름지정
+                SetP(ct, string.Format("{0} _ {1} ", x, z + 1 - 20));
+                exClickTile = true;
+
+
+
+            }
+        }
+        /////////////////
+        if (z - 1 > 0)//아래로생성
+        {
+            if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1)).transform.childCount == 2)
+            {
+
+            }
+            if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1)).transform.childCount == 1)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1)).transform.GetChild(0).tag == "CT")
+                {
+
+                }
+                if (turn == "W")//백턴
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1)).transform.GetChild(0).tag == "B")
+                    {
+                        GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct.tag = "CT";//태그지정
+                        ct.name = "Ctile";//이름지정
+                        SetP(ct, string.Format("{0} _ {1} ", x, z - 1));
+                        exClickTile = true;
+
+                    }
+                    else
+                    {
+
+                    }
+                }//백턴
+                else //흑턴
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1)).transform.GetChild(0).tag == "W")
+                    {
+                        GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct.tag = "CT";//태그지정
+                        ct.name = "Ctile";//이름지정
+                        SetP(ct, string.Format("{0} _ {1} ", x, z - 1));
+                        exClickTile = true;
+
+                    }
+                    else
+                    {
+
+                    }
+                }//흑턴
+            }
+            else
+            {
+
+                GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                ct.tag = "CT";//태그지정
+                ct.name = "Ctile";//이름지정
+                SetP(ct, string.Format("{0} _ {1} ", x, z - 1));
+                exClickTile = true;
+
+
+
+            }
+        }//아래생성
+        else if (z - 1 < 1)
+        {
+
+            if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1 + 20)).transform.childCount == 2)
+            {
+
+            }
+            if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1 + 20)).transform.childCount == 1)
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1 + 20)).transform.GetChild(0).tag == "CT")
+                {
+
+                }
+                if (turn == "W")//백턴
+                {
+
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1 + 20)).transform.GetChild(0).tag == "B")
+                    {
+                        GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct.tag = "CT";//태그지정
+                        ct.name = "Ctile";//이름지정
+                        SetP(ct, string.Format("{0} _ {1} ", x, z - 1 + 20));
+                        exClickTile = true;
+
+                    }
+                    else
+                    {
+
+                    }
+                }//백턴
+                else //흑턴
+                {
+                    if (GameObject.Find(string.Format("{0} _ {1} ", x, z - 1 + 20)).transform.GetChild(0).tag == "W")
+                    {
+                        GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                        ct.tag = "CT";//태그지정
+                        ct.name = "Ctile";//이름지정
+                        SetP(ct, string.Format("{0} _ {1} ", x, z - 1 + 20));
+                        exClickTile = true;
+
+                    }
+                    else
+                    {
+
+                    }
+                }//흑턴
+            }
+            else
+            {
+
+                GameObject ct = Instantiate(cTile);//클릭하여 위치로 이동하는 타일 생성
+                ct.tag = "CT";//태그지정
+                ct.name = "Ctile";//이름지정
+                SetP(ct, string.Format("{0} _ {1} ", x, z - 1 + 20));
+                exClickTile = true;
+
+
+
+
+            }
+        }//아래로생성
+        ////////////////
+        if (x + 1 < 9)
+        {
+            if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z)).transform.childCount == 0) //빈타일
+            {
+                CreatCT(x + 1, z);
+            }//빈타일
+            else if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z)).transform.childCount == 1) //안빈타일
+            {
+                if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x + 1, z)).transform.GetChild(0).tag == "B")//벡턴에 흑이면 
+                {
+                    CreatCT(x + 1, z);
+
+                }
+                else if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x + 1, z)).transform.GetChild(0).tag == "W")//백턴에백이면 
+                {
+
+                }
+                else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x + 1, z)).transform.GetChild(0).tag == "W")//흑턴에백이면
+                {
+                    CreatCT(x + 1, z);
+
+                }
+                else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x + 1, z)).transform.GetChild(0).tag == "B")//흑턴에흑이면 
+                {
+
+                }
+            }//안빈타일
+
+        }//오른쪽생성
+        ///////////////
+        if (x - 1 > 0)
+        {
+            if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z)).transform.childCount == 0) //빈타일
+            {
+                CreatCT(x - 1, z);
+            }//빈타일
+            else if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z)).transform.childCount == 1) //안빈타일
+            {
+                if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x - 1, z)).transform.GetChild(0).tag == "B")//벡턴에 흑이면 
+                {
+                    CreatCT(x - 1, z);
+
+                }
+                else if (turn == "W" && GameObject.Find(string.Format("{0} _ {1} ", x - 1, z)).transform.GetChild(0).tag == "W")//백턴에백이면 
+                {
+
+                }
+                else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x - 1, z)).transform.GetChild(0).tag == "W")//흑턴에백이면
+                {
+                    CreatCT(x - 1, z);
+
+                }
+                else if (turn == "B" && GameObject.Find(string.Format("{0} _ {1} ", x - 1, z)).transform.GetChild(0).tag == "B")//흑턴에흑이면 
+                {
+
+                }
+            }//안빈타일
+
+        }/////왼쪽생성
+        ////////////////
+        if (z + 1 < 21)
+        {
+            if (x+1 > 8)
+            {
+
+
+            }
+            else
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x+1, z + 1)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x+1, z + 1);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x+1, z + 1)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x+1, z + 1)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x+1, z + 1);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x+1, z + 1)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x+1, z + 1);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+
+            }
+        }//오른쪽위 생성
+        else if (z + 1 > 20)
+        {
+            if (x+1 > 8)
+            {
+
+
+            }
+            else
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x+1, z + 1 - 20)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x+1, z + 1 - 20);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x+1, z + 1 - 20)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x+1, z + 1 - 20)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x+1, z + 1 - 20);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x+1, z + 1 - 20)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x+1, z + 1 - 20);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+            }
+        }//오른쪽위 생성
+        ////////////////
+        if (z - 1 > 0)
+        {
+            if (x + 1 > 8)
+            {
+
+
+            }
+            else
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z-1)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x + 1, z-1);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z-1)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z-1)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x + 1, z-1);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z-1)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x + 1, z-1);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+
+            }
+        }//오른쪽아래 생성
+        else if (z-1 <1)
+        {
+            if (x + 1 > 8)
+            {
+
+
+            }
+            else
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z-1 +20)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x + 1, z-1 +20);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z-1 +20)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z-1 +20)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x + 1, z-1 +20);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z-1 +20)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x + 1, z-1 +20);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+            }
+        }//오른쪽아래 생성
+        ////////////////
+        if (z + 1 < 21)
+        {
+            if (x-1 < 1)
+            {
+
+
+            }
+            else
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z + 1)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x-1, z + 1);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z + 1)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z + 1)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x-1, z + 1);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z + 1)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x-1, z + 1);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+
+            }
+        }//왼쪽위 생성
+        else if (z + 1 > 20)
+        {
+            if (x-1 < 1)
+            {
+
+
+            }
+            else
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z + 1 - 20)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x-1, z + 1 - 20);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z + 1 - 20)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z + 1 - 20)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x-1, z + 1 - 20);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z + 1 - 20)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x-1, z + 1 - 20);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+            }
+        }//왼쪽위 생성
+        ////////////////
+        if (z - 1 > 0)
+        {
+            if (x-1 < 1)
+            {
+
+
+            }
+            else
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z - 1)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x-1, z - 1);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z - 1)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z - 1)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x-1, z - 1);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z - 1)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x-1, z - 1);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+
+            }
+        }//오른쪽아래 생성
+        else if (z - 1 < 1)
+        {
+            if (x-1 < 1)
+            {
+
+
+            }
+            else
+            {
+                if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z - 1 + 20)).transform.childCount == 0) //빈타일
+                {
+                    CreatCT(x-1, z - 1 + 20);
+                }//빈타일
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z - 1 + 20)).transform.childCount == 1)
+                {
+                    if (turn == "W")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z - 1 + 20)).transform.GetChild(0).tag == "B")
+                        {
+                            CreatCT(x-1, z - 1 + 20);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    if (turn == "B")
+                    {
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x-1, z - 1 + 20)).transform.GetChild(0).tag == "W")
+                        {
+                            CreatCT(x-1, z - 1 + 20);
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+            }
+        }//오른쪽아래 생성
+         ////////////////
+
+    }
 }
 
