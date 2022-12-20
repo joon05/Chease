@@ -1893,7 +1893,7 @@ public class Main : MonoBehaviour
             {
                 if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 20)).transform.childCount == 0)
                 {
-                    CreatCT(x + 2, 20);
+                    CreatCT(x - 2, 20);
                 }
                 else if (GameObject.Find(string.Format("{0} _ {1} ", x - 2, 20)).transform.childCount == 1)
                 {
@@ -1956,26 +1956,26 @@ public class Main : MonoBehaviour
             }
             else if (z + 2 > 20)
             {
-                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 19)).transform.childCount == 0)
+                if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 18)).transform.childCount == 0)
                 {
-                    CreatCT(x + 1, z - 19);
+                    CreatCT(x + 1, z - 18);
                 }
-                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 19)).transform.childCount == 1)
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 18)).transform.childCount == 1)
                 {
                     if (turn == "W")
                     {
-                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 19)).transform.GetChild(0).tag == "B")
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 18)).transform.GetChild(0).tag == "B")
                         {
-                            CreatCT(x + 1, z - 19);
+                            CreatCT(x + 1, z - 18);
 
                         }
 
                     }
                     if (turn == "B")
                     {
-                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 19)).transform.GetChild(0).tag == "W")
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x + 1, z - 18)).transform.GetChild(0).tag == "W")
                         {
-                            CreatCT(x + 1, z - 19);
+                            CreatCT(x + 1, z - 18);
 
                         }
 
@@ -2077,26 +2077,26 @@ public class Main : MonoBehaviour
             }
             else if (z + 2 > 20)
             {
-                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 19)).transform.childCount == 0)
+                if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 18)).transform.childCount == 0)
                 {
-                    CreatCT(x - 1, z - 19);
+                    CreatCT(x - 1, z - 18);
                 }
-                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 19)).transform.childCount == 1)
+                else if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 18)).transform.childCount == 1)
                 {
                     if (turn == "W")
                     {
-                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 19)).transform.GetChild(0).tag == "B")
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 18)).transform.GetChild(0).tag == "B")
                         {
-                            CreatCT(x - 1, z - 19);
+                            CreatCT(x - 1, z - 18);
 
                         }
 
                     }
                     if (turn == "B")
                     {
-                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 19)).transform.GetChild(0).tag == "W")
+                        if (GameObject.Find(string.Format("{0} _ {1} ", x - 1, z - 18)).transform.GetChild(0).tag == "W")
                         {
-                            CreatCT(x - 1, z - 19);
+                            CreatCT(x - 1, z - 18);
 
                         }
 
