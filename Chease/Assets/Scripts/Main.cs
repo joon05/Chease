@@ -72,24 +72,24 @@ public class Main : MonoBehaviour
                             float x = float.Parse(clickedObj.transform.parent.name.Substring(0, 2));//선택된 오브젝트의 가상x좌표
                             float z = float.Parse(clickedObj.transform.parent.name.Substring(4));//선택된 오브젝트의 가상z좌표
 
-                            if (clickedObj.name == "WPawnU")//클릭된 오브젝트가 위로가는 폰이라면 
+                            if (clickedObj.name == "WPawnU1"|| clickedObj.name == "WPawnU2"|| clickedObj.name == "WPawnU3"|| clickedObj.name == "WPawnU4"|| clickedObj.name == "WPawnU5"|| clickedObj.name == "WPawnU6"|| clickedObj.name == "WPawnU7"|| clickedObj.name == "WPawnU8")//클릭된 오브젝트가 위로가는 폰이라면 
                             {
                                 UPawnMove(clickedObj, "W", x, z);
                             }//폰선택
-                            if (clickedObj.name == "WPawnD")//클릭된 오브젝트가 위로가는 폰이라면 
+                            if (clickedObj.name == "WPawnD1"|| clickedObj.name == "WPawnD2"|| clickedObj.name == "WPawnD3"|| clickedObj.name == "WPawnD4"|| clickedObj.name == "WPawnD5"|| clickedObj.name == "WPawnD6"|| clickedObj.name == "WPawnD7"|| clickedObj.name == "WPawnD8")//클릭된 오브젝트가 위로가는 폰이라면 
                             {
 
                                 DPawnMove(clickedObj, "W", x, z);
                             }//폰선택
-                            if (clickedObj.name == "WRook")//
+                            if (clickedObj.name == "WRook1"|| clickedObj.name == "WRook2")//
                             {
                                 RookMove(clickedObj, "W", x, z);
                             }//룩선택
-                            if (clickedObj.name == "WBishop")
+                            if (clickedObj.name == "WBishop1"|| clickedObj.name == "WBisho2")
                             {
                                 BishopMove(clickedObj, "W", x, z);
                             }//비숍선택
-                            if (clickedObj.name == "WKnight")
+                            if (clickedObj.name == "WKnight1"|| clickedObj.name == "WKnight2")
                             {
                                 KnightMove(clickedObj, "W", x, z);
                             }//나이트선택
@@ -110,24 +110,24 @@ public class Main : MonoBehaviour
                             float x = float.Parse(clickedObj.transform.parent.name.Substring(0, 2));//선택된 오브젝트의 가상x좌표
                             float z = float.Parse(clickedObj.transform.parent.name.Substring(4));//선택된 오브젝트의 가상z좌표
 
-                            if (clickedObj.name == "BPawnU")//클릭된 오브젝트가 위로가는 폰이라면 
+                            if (clickedObj.name == "BPawnU1"|| clickedObj.name == "BPawnU2"|| clickedObj.name == "BPawnU3"|| clickedObj.name == "BPawnU4"|| clickedObj.name == "BPawnU5"|| clickedObj.name == "BPawnU6"|| clickedObj.name == "BPawnU7"|| clickedObj.name == "BPawnU8")//클릭된 오브젝트가 위로가는 폰이라면 
                             {
                                 UPawnMove(clickedObj, "B", x, z);
                             }
                             //폰선택
-                            if (clickedObj.name == "BPawnD")//클릭된 오브젝트가 위로가는 폰이라면 
+                            if (clickedObj.name == "BPawnD1"|| clickedObj.name == "BPawnD2"|| clickedObj.name == "BPawnD3"|| clickedObj.name == "BPawnD4"|| clickedObj.name == "BPawnD5"|| clickedObj.name == "BPawnD6"|| clickedObj.name == "BPawnD7"|| clickedObj.name == "BPawnD8")//클릭된 오브젝트가 위로가는 폰이라면 
                             {
                                 DPawnMove(clickedObj, "B", x, z);
                             }//폰선택
-                            if (clickedObj.name == "BRook")//
+                            if (clickedObj.name == "BRook1"|| clickedObj.name == "BRook2")//
                             {
                                 RookMove(clickedObj, "B", x, z);
                             }//룩선택
-                            if (clickedObj.name == "BBishop")
+                            if (clickedObj.name == "BBishop1"|| clickedObj.name == "BBishop2")
                             {
                                 BishopMove(clickedObj, "B", x, z);
                             }//비숍선택
-                            if (clickedObj.name == "BKnight")
+                            if (clickedObj.name == "BKnight1"|| clickedObj.name == "BKnight2")
                             {
                                 KnightMove(clickedObj, "B", x, z);
                             }//나이트선택
@@ -239,7 +239,7 @@ public class Main : MonoBehaviour
         {
 
             GameObject pawnU = Instantiate(pawnW);//PawnU위로 가는폰
-            pawnU.name = "WPawnU";//이름변경
+            pawnU.name = string.Format("WPawnU{0}",x);//이름변경
             pawnU.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x, 4)).transform;//부모지정
             pawnU.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
             pawnU.transform.position = new Vector3(x, 0.3f, 104);//위치 설정
@@ -247,7 +247,7 @@ public class Main : MonoBehaviour
             pawnU.tag = "W";//태그 추가
 
             GameObject pawnD = Instantiate(pawnW);//PawnD아래로 가는폰
-            pawnD.name = "WPawnD";//이름변경
+            pawnD.name = string.Format("WPawnD{0}", x);//이름변경
             pawnD.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x, 2)).transform;//부모지정
             pawnD.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
             pawnD.transform.position = new Vector3(x, 0.3f, 102);//위치 설정
@@ -266,14 +266,14 @@ public class Main : MonoBehaviour
 
         //비숍생성============================================
         GameObject bishop = Instantiate(bishopW);//첫번째 비숍
-        bishop.name = "WBishop";//이름변경
+        bishop.name = "WBishop1";//이름변경
         bishop.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 3, 3)).transform;//부모지정
         bishop.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         bishop.transform.position = new Vector3(3, 0.3f, 103);//위치 설정
         bishop.tag = "W";//태그 추가
 
         GameObject bishop2 = Instantiate(bishopW);//두번째 비숍
-        bishop2.name = "WBishop";//이름변경
+        bishop2.name = "WBishop2";//이름변경
         bishop2.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 6, 3)).transform;//부모지정
         bishop2.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         bishop2.transform.position = new Vector3(6, 0.3f, 103);//위치 설정
@@ -282,14 +282,14 @@ public class Main : MonoBehaviour
 
         //룩생성========================
         GameObject rook = Instantiate(rookW);//첫번째 룩
-        rook.name = "WRook";//이름변경
+        rook.name = "WRook1";//이름변경
         rook.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 1, 3)).transform;//부모지정
         rook.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         rook.transform.position = new Vector3(1, 0.3f, 103);//위치 설정
         rook.tag = "W";//태그 추가
 
         GameObject rook2 = Instantiate(rookW);//두번째 룩
-        rook2.name = "WRook";//이름변경
+        rook2.name = "WRook2";//이름변경
         rook2.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 8, 3)).transform;//부모지정
         rook2.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         rook2.transform.position = new Vector3(8, 0.3f, 103);//위치 설정
@@ -298,14 +298,14 @@ public class Main : MonoBehaviour
 
         //나이트생성========================
         GameObject knight = Instantiate(knightW);//첫번째 나이트
-        knight.name = "WKnight";//이름변경
+        knight.name = "WKnight1";//이름변경
         knight.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 2, 3)).transform;//부모지정
         knight.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         knight.transform.position = new Vector3(2, 0.3f, 103);//위치 설정
         knight.tag = "W";//태그 추가
 
         GameObject knight2 = Instantiate(knightW);//두번째 나이트
-        knight2.name = "WKnight";//이름변경
+        knight2.name = "WKnight2";//이름변경
         knight2.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 7, 3)).transform;//부모지정
         knight2.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         knight2.transform.position = new Vector3(7, 0.3f, 103);//위치 설정
@@ -329,7 +329,7 @@ public class Main : MonoBehaviour
         {
 
             GameObject pawnU = Instantiate(pawnB);//PawnU위로 가는폰
-            pawnU.name = "BPawnU";//이름변경
+            pawnU.name = string.Format("BPawnU{0}", x);//이름변경;//이름변경
             pawnU.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x, 14)).transform;//부모지정
             pawnU.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
             pawnU.transform.position = new Vector3(x, 0.3f, 114);//위치 설정
@@ -337,7 +337,7 @@ public class Main : MonoBehaviour
             pawnU.tag = "B";//태그 추가
 
             GameObject pawnD = Instantiate(pawnB);//PawnD아래로 가는폰
-            pawnD.name = "BPawnD";//이름변경
+            pawnD.name = string.Format("BPawnD{0}", x);//이름변경
             pawnD.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", x, 12)).transform;//부모지정
             pawnD.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
             pawnD.transform.position = new Vector3(x, 0.3f, 112);//위치 설정
@@ -356,14 +356,14 @@ public class Main : MonoBehaviour
 
         //비숍생성============================================
         GameObject bishop = Instantiate(bishopB);//첫번째 비숍
-        bishop.name = "BBishop";//이름변경
+        bishop.name = "BBishop1";//이름변경
         bishop.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 3, 13)).transform;//부모지정
         bishop.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         bishop.transform.position = new Vector3(3, 0.3f, 113);//위치 설정
         bishop.tag = "B";//태그 추가
 
         GameObject bishop2 = Instantiate(bishopB);//두번째 비숍
-        bishop2.name = "BBishop";//이름변경
+        bishop2.name = "BBishop2";//이름변경
         bishop2.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 6, 13)).transform;//부모지정
         bishop2.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         bishop2.transform.position = new Vector3(6, 0.3f, 113);//위치 설정
@@ -372,14 +372,14 @@ public class Main : MonoBehaviour
 
         //룩생성========================
         GameObject rook = Instantiate(rookB);//첫번째 룩
-        rook.name = "BRook";//이름변경
+        rook.name = "BRook1";//이름변경
         rook.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 1, 13)).transform;//부모지정
         rook.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         rook.transform.position = new Vector3(1, 0.3f, 113);//위치 설정
         rook.tag = "B";//태그 추가
 
         GameObject rook2 = Instantiate(rookB);//두번째 룩
-        rook2.name = "BRook";//이름변경
+        rook2.name = "BRook2";//이름변경
         rook2.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 8, 13)).transform;//부모지정
         rook2.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         rook2.transform.position = new Vector3(8, 0.3f, 113);//위치 설정
@@ -388,14 +388,14 @@ public class Main : MonoBehaviour
 
         //나이트생성========================
         GameObject knight = Instantiate(knightB);//첫번째 나이트
-        knight.name = "BKnight";//이름변경
+        knight.name = "BKnight1";//이름변경
         knight.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 2, 13)).transform;//부모지정
         knight.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         knight.transform.position = new Vector3(2, 0.3f, 113);//위치 설정
         knight.tag = "B";//태그 추가
 
         GameObject knight2 = Instantiate(knightB);//두번째 나이트
-        knight2.name = "BKnight";//이름변경
+        knight2.name = "BKnight2";//이름변경
         knight2.transform.parent = GameObject.Find(string.Format("{0} _ {1} ", 7, 13)).transform;//부모지정
         knight2.transform.localScale = new Vector3(Sc, Sc, 200 * Sc);//크기 지정,z에 200곱한건 타일 자식으로 둘때 모양이 일그러지지 않게 하려고
         knight2.transform.position = new Vector3(7, 0.3f, 113);//위치 설정
